@@ -25,13 +25,13 @@ description = "How using go test on a main package can clash with module naming"
 author = "Christoph Berger"
 email = "chris@appliedgo.net"
 date = "2020-11-28"
-draft = "true"
+draft = "false"
 categories = ["Go Ecosystem"]
-tags = ["test", "modules", ""]
+tags = ["test", "modules"]
 articletypes = ["Background"]
 +++
 
-Two questions for you: Do you name an app module simply "main"? And do you happen to write tests for a main package? If so, you are in big trouble! (Ouch, that's quite clickbait-ey, isn't it?) Well, the world is not exactly going to end; however, you might encounter an unexpected error that is hard to track down.
+Two questions for you: Do you name an app module simply "main"? And do you happen to write tests for a main package? If so, you are in big trouble! (Ok, that was a bit clickbait-ey...) Well, the world is not exactly going to end; however, you might encounter an unexpected error that is hard to track down.
 
 <!--more-->
 
@@ -104,6 +104,8 @@ inside the project directory, but instead of the usual output, you get this:
 FAIL    main [build failed]
 FAIL
 ```
+
+Hm, why does `go test` say, 'cannot import "main"'?
 
 Your test file uses package `main`, and so there is no `import main` anywhere in your test file. After all, no one would ever want to import package `main`, right?
 
@@ -195,7 +197,11 @@ Now we have two options for addressing the problem.
 
 1. Do not write tests for package main. Main is for integrating your code units (a.k.a packages) and usually would not contain unit-testable code. IF you have test-worthy code in main (for unit tests, that is; not for integration tests), consider moving it into a library package.
 
-2. Or rename your "main" module. You can choose a name of your liking, and you do not even need to add an import path prefix, as package `main` is not supposed to be fetched by an `import` directive. So for your next project, try something like `go mod init jumpingjehoshaphat`.
+2. Or rename your "main" module. You can choose a name of your liking, and you do not even need to add an import path prefix, as package `main` is not supposed to be fetched by an `import` directive. So for your next app project, try something like,
+
+    ```sh
+    go mod init jumpingjehoshaphat
+    ```
 
 
 **Happy coding!**
