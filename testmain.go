@@ -88,7 +88,7 @@ func Test_square(t *testing.T) {
 }
 /*
 
-## Now things start to turn weird
+## Now things start to turn... interesting
 
 Finally, with all tests in place, you run
 
