@@ -58,7 +58,7 @@ After all, who says that unit tests are restricted to library packages? And this
 An example:
 */
 // The go.mod file
-module main
+module github.com/appliedgo/CHANGEME
 
 go 1.15
 /*
